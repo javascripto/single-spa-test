@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+  <script src="store.js"></script>
+  <meta name="importmap-type" content="systemjs-importmap">
+  <script type="systemjs-importmap">
+    {
+      imports: {
+        'single-spa': 'https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.1.0/esm/single-spa.min.js',
+        'header': 'http://localhost:3000/static/js/main.chunk.js',
+        'content': 'http://localhost:3001/static/js/main.chunk.js',
+      }
+    }
+  </script>
+
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@4.3.7/lib/system/single-spa.min.js" as="script" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/single-spa-html"></script>
+  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@1.8.0/dist/import-map-overrides.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/5.0.0/system.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/5.0.0/extras/amd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/5.0.0/extras/named-exports.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/5.0.0/extras/named-register.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/5.0.0/extras/use-default.min.js"></script>
+  <!-- <script src="http://localhost:8000/components/product-image.js"></script> -->
+  <!-- <script src="http://localhost:8000/components/product-description.js"></script> -->
+
+  <!-- https://www.youtube.com/watch?v=wU06eTMQ6yI -->
+
+  <script>
+    System.import('single-spa').then(function (singleSpa) {
+      const _import = path => () => System.import(path);
+      const _location = path => location => location.pathname.startsWith(path);
+
+      singleSpa.registerApplication('header', _import('header'), _location('/'));
+      singleSpa.registerApplication('content', _import('content'), _location('/'));
+
+      singleSpa.start();
+    });
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <div id="single-spa-app:header"></div>
+  
+  <div class="content">
+    <div class="top">
+      <div id="single-spa-app:product-image"></div>
+      <div id="single-spa-app:buy-tools"></div>
+    </div>
+  </div>
+</body>

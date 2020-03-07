@@ -1,0 +1,10 @@
+{
+  "name": "sspa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yuri Almeida <yurialves2@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "single-spa-react": "^2.11.1"
+  }
+}
